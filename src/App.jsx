@@ -4,6 +4,7 @@ import LandingPage from './pages/LandingPage';
 import SignUpPage from './pages/SignUpPage';
 import LoginPage from './pages/LoginPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
+import AppPage from './pages/AppPage';
 
 export default function App() {
   return (
@@ -13,7 +14,7 @@ export default function App() {
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/reset-password" element={<ResetPasswordPage />} />
-        <Route path="/app" element={<div style={{ padding: '64px', textAlign: 'center', fontFamily: 'var(--font-body)' }}><h1>CRM App — coming soon</h1></div>} />
+        <Route path="/app" element={<AppPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
