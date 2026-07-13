@@ -1,0 +1,603 @@
+<title>OUTFIT® — Design System</title>
+<!--
+  OUTFIT® Design System — living style guide.
+  Reconstructed from the art direction of outfit.hellohello.is (++hellohello).
+  Deliberately single-world (warm paper / deep ink): this is the store's
+  authentic editorial identity, so it renders the same in light and dark.
+  Fonts use the Helvetica/Arial system stack, which IS the faithful Neue Haas
+  Grotesk fallback — CSP-safe, no webfont load.
+-->
+<style>
+  :root {
+    color-scheme: light;
+
+    --font-sans: "Neue Haas Grotesk Display Pro", "Neue Haas Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --font-mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", Menlo, Consolas, monospace;
+
+    /* neutrals — warm paper to ink */
+    --paper: #f1eee6;
+    --paper-sunk: #e8e4d9;
+    --surface: #fcfbf7;
+    --ink: #121110;
+    --ink-2: #2a2824;
+    --graphite: #55524b;
+    --slate: #8b877e;
+    --fog: #b8b4a9;
+    --hairline: #d9d5c8;
+    --hairline-strong: #c3bdad;
+
+    /* accent + status */
+    --accent: #2b2bf5;
+    --accent-press: #1e1ecb;
+    --accent-ink: #ffffff;
+    --accent-soft: rgba(43, 43, 245, 0.08);
+    --success: #1e7f4e;
+    --warning: #b8791b;
+    --error: #c4362b;
+
+    /* product colorways */
+    --way-cobalt: #2b2bf5;
+    --way-lime: #c7f03d;
+    --way-red: #ff3b2e;
+    --way-lilac: #c6b4ff;
+    --way-butter: #f4ce3a;
+    --way-forest: #17493b;
+    --way-clay: #c96f4a;
+    --way-sky: #9fd6e8;
+    --way-cream: #ece5d3;
+    --way-black: #171614;
+
+    --track-label: 0.14em;
+    --gutter: clamp(18px, 4vw, 44px);
+    --container: 1320px;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink-2);
+    font: 400 16px/1.6 var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1, h2, h3, h4 { margin: 0; color: var(--ink); font-family: var(--font-sans); }
+  p { margin: 0; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+  .container { width: 100%; max-width: var(--container); margin-inline: auto; padding-inline: var(--gutter); }
+
+  .mono { font-family: var(--font-mono); }
+  .reg { color: var(--accent); font-size: 0.4em; vertical-align: super; font-weight: 700; }
+
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font: 600 12px/1.1 var(--font-mono);
+    letter-spacing: var(--track-label); text-transform: uppercase; color: var(--slate);
+  }
+  .eyebrow::before { content: ""; width: 20px; height: 1px; background: var(--hairline-strong); }
+
+  /* ---- top bar ---- */
+  header.bar {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; gap: 32px; height: 66px;
+    padding-inline: var(--gutter);
+    background: color-mix(in srgb, var(--paper) 84%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .brand { font: 700 20px/1 var(--font-sans); letter-spacing: -0.02em; color: var(--ink); }
+  nav.bar-links { display: flex; gap: 26px; }
+  nav.bar-links a {
+    font: 600 12px/1 var(--font-mono); letter-spacing: var(--track-label);
+    text-transform: uppercase; color: var(--graphite);
+  }
+  nav.bar-links a:hover { color: var(--ink); text-decoration: none; }
+  .bar-tag { margin-left: auto; font: 600 12px/1 var(--font-mono); letter-spacing: var(--track-label); text-transform: uppercase; color: var(--ink); }
+
+  /* ---- hero ---- */
+  .hero { padding: clamp(56px, 9vw, 120px) 0 clamp(40px, 6vw, 72px); }
+  .display {
+    font: 700 clamp(64px, 13vw, 168px)/0.9 var(--font-sans);
+    letter-spacing: -0.05em; color: var(--ink); text-wrap: balance; margin: 18px 0 0;
+  }
+  .lead { font: 400 clamp(18px, 1.7vw, 22px)/1.5 var(--font-sans); color: var(--graphite); max-width: 640px; margin-top: 28px; text-wrap: pretty; }
+  .hero-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+
+  /* ---- marquee ---- */
+  .marquee { overflow: hidden; background: var(--ink); color: var(--surface); border-block: 1.5px solid var(--ink); padding-block: 14px; }
+  .marquee-track { display: flex; align-items: center; gap: 3rem; width: max-content; padding-left: 3rem; animation: scroll 30s linear infinite; }
+  .marquee-item { display: inline-flex; align-items: center; gap: 3rem; font: 600 14px/1 var(--font-mono); letter-spacing: var(--track-label); text-transform: uppercase; white-space: nowrap; }
+  .marquee-item::after { content: "✳"; color: var(--accent); }
+  @keyframes scroll { to { transform: translateX(-50%); } }
+
+  /* ---- section scaffold ---- */
+  section.block { padding: clamp(56px, 8vw, 104px) 0; border-top: 1px solid var(--hairline); }
+  .block-head { display: grid; grid-template-columns: auto 1fr; gap: 28px; align-items: start; margin-bottom: 52px; }
+  .fig { font: 600 12px/1.6 var(--font-mono); letter-spacing: var(--track-label); color: var(--accent); text-transform: uppercase; white-space: nowrap; padding-top: 10px; }
+  .block-head h2 { font: 600 clamp(30px, 4.4vw, 50px)/1.02 var(--font-sans); letter-spacing: -0.025em; }
+  .block-head .intro { grid-column: 2; font: 400 clamp(17px, 1.5vw, 20px)/1.5 var(--font-sans); color: var(--graphite); max-width: 620px; margin-top: 14px; }
+
+  /* ---- panels + grids ---- */
+  .panel { background: var(--surface); border: 1px solid var(--hairline); border-radius: 4px; padding: 28px; }
+  .auto-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .rule { border: none; border-top: 1px solid var(--hairline); margin: 28px 0; }
+
+  .principle h3 { font: 600 20px/1.25 var(--font-sans); }
+  .principle p { font: 400 14px/1.5 var(--font-sans); color: var(--graphite); margin-top: 12px; }
+
+  /* ---- swatches ---- */
+  .swatch-grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)); }
+  .swatch .chip { height: 78px; border-radius: 4px; border: 1px solid var(--hairline); }
+  .swatch .name { font: 500 13px/1.4 var(--font-mono); color: var(--ink); margin-top: 8px; }
+  .swatch .val { font: 500 11px/1.5 var(--font-mono); color: var(--slate); text-transform: uppercase; }
+  .swatch .tok { font: 500 11px/1.5 var(--font-mono); color: var(--slate); }
+
+  /* ---- type specimens ---- */
+  .type-row { display: grid; grid-template-columns: 150px 1fr; gap: 24px; align-items: baseline; padding: 18px 0; border-top: 1px solid var(--hairline); }
+  .type-row:first-child { border-top: none; }
+  .type-row .k { font: 500 12px/1.5 var(--font-mono); color: var(--ink); }
+  .type-row .k span { display: block; color: var(--slate); margin-top: 4px; }
+  .type-row .s { color: var(--ink); overflow: hidden; }
+  .t-display { font: 700 clamp(40px, 6vw, 76px)/0.95 var(--font-sans); letter-spacing: -0.045em; }
+  .t-h1 { font: 700 clamp(34px, 4vw, 52px)/1 var(--font-sans); letter-spacing: -0.035em; }
+  .t-h2 { font: 600 clamp(28px, 3vw, 40px)/1.02 var(--font-sans); letter-spacing: -0.025em; }
+  .t-h3 { font: 600 26px/1.1 var(--font-sans); letter-spacing: -0.02em; }
+  .t-lead { font: 400 20px/1.5 var(--font-sans); color: var(--graphite); }
+  .t-body { font: 400 16px/1.6 var(--font-sans); color: var(--ink-2); }
+  .t-label { font: 600 13px/1.2 var(--font-mono); letter-spacing: var(--track-label); text-transform: uppercase; }
+  .t-meta { font: 500 14px/1.4 var(--font-mono); color: var(--graphite); }
+  .t-price { font: 500 16px/1 var(--font-mono); }
+
+  /* ---- spec rows (space + radius) ---- */
+  .spec { display: flex; align-items: center; gap: 20px; padding: 12px 0; border-top: 1px solid var(--hairline); }
+  .spec:first-child { border-top: none; }
+  .spec .lab { width: 92px; font: 500 12px/1 var(--font-mono); color: var(--ink); }
+  .spec .num { width: 56px; font: 500 12px/1 var(--font-mono); color: var(--slate); }
+  .spec .viz { flex: 1; }
+  .bar { height: 12px; background: var(--accent); }
+
+  /* ---- buttons ---- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 13px 24px; font: 600 13px/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase;
+    border: 1.5px solid transparent; border-radius: 2px; cursor: pointer; background: none; color: inherit;
+    transition: background 0.12s var(--ease), color 0.12s var(--ease), border-color 0.12s var(--ease), transform 0.12s var(--ease);
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn:focus-visible { outline: none; box-shadow: 0 0 0 2px var(--paper), 0 0 0 4px var(--accent); }
+  .btn--primary { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+  .btn--primary:hover { background: var(--accent); border-color: var(--accent); }
+  .btn--accent { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  .btn--accent:hover { background: var(--accent-press); border-color: var(--accent-press); }
+  .btn--outline { color: var(--ink); border-color: var(--ink); }
+  .btn--outline:hover { background: var(--ink); color: var(--surface); }
+  .btn--ghost { color: var(--graphite); }
+  .btn--ghost:hover { color: var(--ink); background: var(--accent-soft); }
+  .btn--lg { padding: 17px 34px; font-size: 14px; }
+  .btn--sm { padding: 9px 16px; font-size: 12px; }
+  .btn--block { display: flex; width: 100%; }
+  .btn[disabled] { opacity: 0.45; pointer-events: none; }
+
+  /* ---- tags ---- */
+  .tag { display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px; font: 600 12px/1 var(--font-mono); letter-spacing: var(--track-label); text-transform: uppercase; color: var(--ink); border: 1px solid var(--hairline-strong); border-radius: 999px; }
+  .tag--solid { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+  .tag--accent { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  .tag--new { background: var(--way-lime); color: var(--ink); border-color: var(--way-lime); }
+  .tag--sold { color: var(--slate); text-decoration: line-through; }
+
+  /* ---- commerce controls ---- */
+  .swatches { display: inline-flex; gap: 8px; }
+  .cw { width: 20px; height: 20px; border-radius: 999px; border: 1px solid rgba(18,17,16,0.18); cursor: pointer; padding: 0; transition: transform 0.12s var(--ease); }
+  .cw:hover { transform: scale(1.12); }
+  .cw[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--surface), 0 0 0 3.5px var(--ink); }
+
+  .sizes { display: inline-flex; flex-wrap: wrap; gap: 8px; }
+  .size { min-width: 46px; padding: 11px 12px; font: 500 13px/1 var(--font-mono); text-transform: uppercase; color: var(--ink); background: none; border: 1px solid var(--hairline-strong); border-radius: 2px; cursor: pointer; transition: background 0.12s var(--ease), color 0.12s var(--ease), border-color 0.12s var(--ease); }
+  .size:hover { border-color: var(--ink); }
+  .size[aria-pressed="true"] { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+  .size[disabled] { color: var(--fog); border-color: var(--hairline); text-decoration: line-through; cursor: not-allowed; }
+
+  .stepper { display: inline-flex; align-items: stretch; border: 1px solid var(--hairline-strong); border-radius: 2px; overflow: hidden; }
+  .stepper button { width: 42px; background: none; border: none; cursor: pointer; font-size: 18px; color: var(--ink); transition: background 0.12s var(--ease); }
+  .stepper button:hover { background: var(--accent-soft); }
+  .stepper output { min-width: 46px; display: inline-flex; align-items: center; justify-content: center; font: 500 14px/1 var(--font-mono); border-inline: 1px solid var(--hairline-strong); }
+
+  /* ---- fields ---- */
+  .field { display: flex; flex-direction: column; gap: 8px; }
+  .field label { font: 600 12px/1 var(--font-mono); letter-spacing: var(--track-label); text-transform: uppercase; color: var(--slate); }
+  .input { width: 100%; padding: 13px 14px; font: 400 15px/1.4 var(--font-sans); color: var(--ink); background: var(--surface); border: 1px solid var(--hairline-strong); border-radius: 2px; }
+  .input::placeholder { color: var(--fog); }
+  .input:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  .input:disabled { background: var(--paper-sunk); color: var(--slate); }
+
+  /* ---- product cards ---- */
+  .products { display: grid; gap: 34px 18px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
+  .card { display: flex; flex-direction: column; gap: 12px; }
+  .card .media { position: relative; aspect-ratio: 4/5; border: 1px solid var(--hairline); border-radius: 4px; overflow: hidden; }
+  .card .flag { position: absolute; top: 12px; left: 12px; z-index: 2; }
+  .card .quick { position: absolute; inset: auto 12px 12px; opacity: 0; transform: translateY(8px); transition: opacity 0.24s var(--ease), transform 0.24s var(--ease); }
+  .card:hover .quick { opacity: 1; transform: none; }
+  .card .row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  .card .title { font: 600 17px/1.2 var(--font-sans); color: var(--ink); }
+  .card .price { font: 500 15px/1 var(--font-mono); color: var(--ink); }
+  .card .meta { font: 500 13px/1.4 var(--font-mono); color: var(--slate); }
+
+  /* ---- usage / footer ---- */
+  .codeblock { background: var(--ink); color: #e8e4d9; border-radius: 4px; padding: 22px 24px; overflow-x: auto; font: 500 13px/1.7 var(--font-mono); }
+  .codeblock .c { color: var(--slate); }
+  .codeblock .p { color: var(--way-sky); }
+  .codeblock .v { color: var(--way-lime); }
+  footer.foot { border-top: 1.5px solid var(--ink); padding: 56px 0; }
+  .foot-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px; align-items: baseline; }
+  .foot-row .note { font: 500 12px/1.6 var(--font-mono); color: var(--slate); }
+
+  @media (max-width: 720px) {
+    .block-head { grid-template-columns: 1fr; gap: 8px; }
+    .block-head .intro { grid-column: 1; }
+    .fig { padding-top: 0; }
+    .type-row { grid-template-columns: 1fr; gap: 8px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; }
+    * { transition: none !important; }
+  }
+</style>
+
+<header class="bar">
+  <span class="brand">OUTFIT<span class="reg">®</span></span>
+  <nav class="bar-links">
+    <a href="#color">Color</a>
+    <a href="#type">Type</a>
+    <a href="#buttons">Components</a>
+    <a href="#usage">Usage</a>
+  </nav>
+  <span class="bar-tag">Design System / v1.0</span>
+</header>
+
+<section class="hero">
+  <div class="container">
+    <span class="eyebrow">Design system · ++hellohello · apparel</span>
+    <h1 class="display">OUTFIT<span class="reg">®</span></h1>
+    <p class="lead">An editorial commerce language — a neutral Swiss grotesque set against warm paper, monospace metadata like a care label, one electric-cobalt accent, and print-sharp corners. The apparel store, distilled into tokens and components.</p>
+    <div class="hero-cta">
+      <a class="btn btn--accent btn--lg" href="#usage">Get the tokens</a>
+      <a class="btn btn--outline btn--lg" href="#buttons">View components</a>
+    </div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item">Editorial commerce</span>
+    <span class="marquee-item">Neue Haas Grotesk</span>
+    <span class="marquee-item">Warm paper / deep ink</span>
+    <span class="marquee-item">Electric cobalt</span>
+    <span class="marquee-item">Mono metadata</span>
+    <span class="marquee-item">Editorial commerce</span>
+    <span class="marquee-item">Neue Haas Grotesk</span>
+    <span class="marquee-item">Warm paper / deep ink</span>
+    <span class="marquee-item">Electric cobalt</span>
+    <span class="marquee-item">Mono metadata</span>
+  </div>
+</div>
+
+<!-- FOUNDATION -->
+<section class="block" id="foundation">
+  <div class="container">
+    <div class="block-head">
+      <span class="fig">Fig. A / Foundation</span>
+      <h2>Principles</h2>
+      <p class="intro">Six ideas the whole system leans on. Every token and component below is a consequence of one of them.</p>
+    </div>
+    <div class="auto-grid">
+      <div class="panel principle"><h3>Type is the layout</h3><p>Big grotesque headlines and a strict grid do the design work. Decoration stays out of the garment’s way.</p></div>
+      <div class="panel principle"><h3>Warm paper, deep ink</h3><p>A bone-white canvas and near-black ink give the store its editorial, printed-catalog warmth.</p></div>
+      <div class="panel principle"><h3>Metadata is monospace</h3><p>Prices, sizes, SKUs and labels are set in mono with wide tracking — like a spec sheet or a care tag.</p></div>
+      <div class="panel principle"><h3>One electric accent</h3><p>Cobalt carries every call to action, link and focus ring. Product colorways supply the rest of the palette.</p></div>
+      <div class="panel principle"><h3>Sharp, printed corners</h3><p>Radii stay small (2–4px). Softness comes from space and photography, never from rounded boxes.</p></div>
+      <div class="panel principle"><h3>Restrained motion</h3><p>A marquee, a hover reveal, a quick fade. Nothing that gets between the shopper and the product.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- COLOR -->
+<section class="block" id="color">
+  <div class="container">
+    <div class="block-head">
+      <span class="fig">Fig. B / Color</span>
+      <h2>Color</h2>
+      <p class="intro">A neutral ramp from warm paper to ink, one electric accent, and the product colorway set garments actually ship in.</p>
+    </div>
+
+    <div style="margin-bottom:48px">
+      <span class="eyebrow">Neutrals</span>
+      <div class="swatch-grid" style="margin-top:18px">
+        <div class="swatch"><div class="chip" style="background:#f1eee6"></div><div class="name">Paper</div><div class="tok">--paper</div><div class="val">#f1eee6</div></div>
+        <div class="swatch"><div class="chip" style="background:#e8e4d9"></div><div class="name">Paper sunk</div><div class="tok">--paper-sunk</div><div class="val">#e8e4d9</div></div>
+        <div class="swatch"><div class="chip" style="background:#fcfbf7"></div><div class="name">Surface</div><div class="tok">--surface</div><div class="val">#fcfbf7</div></div>
+        <div class="swatch"><div class="chip" style="background:#121110"></div><div class="name">Ink</div><div class="tok">--ink</div><div class="val">#121110</div></div>
+        <div class="swatch"><div class="chip" style="background:#2a2824"></div><div class="name">Ink 2</div><div class="tok">--ink-2</div><div class="val">#2a2824</div></div>
+        <div class="swatch"><div class="chip" style="background:#55524b"></div><div class="name">Graphite</div><div class="tok">--graphite</div><div class="val">#55524b</div></div>
+        <div class="swatch"><div class="chip" style="background:#8b877e"></div><div class="name">Slate</div><div class="tok">--slate</div><div class="val">#8b877e</div></div>
+        <div class="swatch"><div class="chip" style="background:#b8b4a9"></div><div class="name">Fog</div><div class="tok">--fog</div><div class="val">#b8b4a9</div></div>
+        <div class="swatch"><div class="chip" style="background:#d9d5c8"></div><div class="name">Hairline</div><div class="tok">--hairline</div><div class="val">#d9d5c8</div></div>
+        <div class="swatch"><div class="chip" style="background:#c3bdad"></div><div class="name">Hairline+</div><div class="tok">--hairline-strong</div><div class="val">#c3bdad</div></div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:48px">
+      <span class="eyebrow">Accent &amp; status</span>
+      <div class="swatch-grid" style="margin-top:18px">
+        <div class="swatch"><div class="chip" style="background:#2b2bf5"></div><div class="name">Accent</div><div class="tok">--accent</div><div class="val">#2b2bf5</div></div>
+        <div class="swatch"><div class="chip" style="background:#1e1ecb"></div><div class="name">Accent press</div><div class="tok">--accent-press</div><div class="val">#1e1ecb</div></div>
+        <div class="swatch"><div class="chip" style="background:#1e7f4e"></div><div class="name">Success</div><div class="tok">--success</div><div class="val">#1e7f4e</div></div>
+        <div class="swatch"><div class="chip" style="background:#b8791b"></div><div class="name">Warning</div><div class="tok">--warning</div><div class="val">#b8791b</div></div>
+        <div class="swatch"><div class="chip" style="background:#c4362b"></div><div class="name">Error</div><div class="tok">--error</div><div class="val">#c4362b</div></div>
+      </div>
+    </div>
+
+    <div>
+      <span class="eyebrow">Product colorways</span>
+      <div class="swatch-grid" style="margin-top:18px">
+        <div class="swatch"><div class="chip" style="background:#2b2bf5"></div><div class="name">Cobalt</div><div class="val">#2b2bf5</div></div>
+        <div class="swatch"><div class="chip" style="background:#c7f03d"></div><div class="name">Lime</div><div class="val">#c7f03d</div></div>
+        <div class="swatch"><div class="chip" style="background:#ff3b2e"></div><div class="name">Red</div><div class="val">#ff3b2e</div></div>
+        <div class="swatch"><div class="chip" style="background:#c6b4ff"></div><div class="name">Lilac</div><div class="val">#c6b4ff</div></div>
+        <div class="swatch"><div class="chip" style="background:#f4ce3a"></div><div class="name">Butter</div><div class="val">#f4ce3a</div></div>
+        <div class="swatch"><div class="chip" style="background:#17493b"></div><div class="name">Forest</div><div class="val">#17493b</div></div>
+        <div class="swatch"><div class="chip" style="background:#c96f4a"></div><div class="name">Clay</div><div class="val">#c96f4a</div></div>
+        <div class="swatch"><div class="chip" style="background:#9fd6e8"></div><div class="name">Sky</div><div class="val">#9fd6e8</div></div>
+        <div class="swatch"><div class="chip" style="background:#ece5d3"></div><div class="name">Cream</div><div class="val">#ece5d3</div></div>
+        <div class="swatch"><div class="chip" style="background:#171614"></div><div class="name">Black</div><div class="val">#171614</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TYPE -->
+<section class="block" id="type">
+  <div class="container">
+    <div class="block-head">
+      <span class="fig">Fig. C / Type</span>
+      <h2>Typography</h2>
+      <p class="intro">Neue Haas Grotesk (falling back to Helvetica Neue / Arial) for everything structural; a monospace for every piece of metadata.</p>
+    </div>
+    <div class="panel">
+      <div class="type-row"><div class="k">Display<span>700 · −0.045em</span></div><div class="s t-display">OUTFIT®</div></div>
+      <div class="type-row"><div class="k">Heading 1<span>700 · −0.035em</span></div><div class="s t-h1">Whitespace matters</div></div>
+      <div class="type-row"><div class="k">Heading 2<span>600 · −0.025em</span></div><div class="s t-h2">The signature collection</div></div>
+      <div class="type-row"><div class="k">Heading 3<span>600 · −0.02em</span></div><div class="s t-h3">Heavyweight cotton tee</div></div>
+      <div class="type-row"><div class="k">Lead<span>400 · 1.5</span></div><div class="s t-lead">A store that celebrates the studio’s passion for apparel and craft.</div></div>
+      <div class="type-row"><div class="k">Body<span>400 · 1.6</span></div><div class="s t-body">Cut from 240gsm organic cotton with a boxy, dropped-shoulder fit. Garment-dyed and pre-washed for zero shrink.</div></div>
+      <div class="type-row"><div class="k">Label · mono<span>600 · +0.14em</span></div><div class="s t-label">Add to bag — size guide</div></div>
+      <div class="type-row"><div class="k">Meta · mono<span>500 · 1.4</span></div><div class="s t-meta">SKU HH-0042 · 100% COTTON</div></div>
+      <div class="type-row"><div class="k">Price · mono<span>500 · 1</span></div><div class="s t-price">$48.00 USD</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SPACE + RADIUS -->
+<section class="block" id="space">
+  <div class="container">
+    <div class="block-head">
+      <span class="fig">Fig. D / Metrics</span>
+      <h2>Space &amp; radius</h2>
+      <p class="intro">A 4px spacing base for consistent rhythm, and a deliberately tight radius scale — the corners stay printed-sharp.</p>
+    </div>
+    <div style="display:grid;gap:48px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))">
+      <div class="panel">
+        <span class="eyebrow">Spacing · 4px base</span>
+        <div style="margin-top:18px">
+          <div class="spec"><span class="lab">space-1</span><span class="num">4px</span><span class="viz"><div class="bar" style="width:4px"></div></span></div>
+          <div class="spec"><span class="lab">space-2</span><span class="num">8px</span><span class="viz"><div class="bar" style="width:8px"></div></span></div>
+          <div class="spec"><span class="lab">space-3</span><span class="num">12px</span><span class="viz"><div class="bar" style="width:12px"></div></span></div>
+          <div class="spec"><span class="lab">space-4</span><span class="num">16px</span><span class="viz"><div class="bar" style="width:16px"></div></span></div>
+          <div class="spec"><span class="lab">space-5</span><span class="num">24px</span><span class="viz"><div class="bar" style="width:24px"></div></span></div>
+          <div class="spec"><span class="lab">space-6</span><span class="num">32px</span><span class="viz"><div class="bar" style="width:32px"></div></span></div>
+          <div class="spec"><span class="lab">space-7</span><span class="num">48px</span><span class="viz"><div class="bar" style="width:48px"></div></span></div>
+          <div class="spec"><span class="lab">space-8</span><span class="num">64px</span><span class="viz"><div class="bar" style="width:64px"></div></span></div>
+          <div class="spec"><span class="lab">space-9</span><span class="num">96px</span><span class="viz"><div class="bar" style="width:96px"></div></span></div>
+        </div>
+      </div>
+      <div class="panel">
+        <span class="eyebrow">Radius</span>
+        <div style="margin-top:18px">
+          <div class="spec"><span class="lab">radius-xs</span><span class="num">2px</span><span class="viz"><div style="height:44px;width:70px;background:var(--paper-sunk);border:1px solid var(--hairline-strong);border-radius:2px"></div></span></div>
+          <div class="spec"><span class="lab">radius-sm</span><span class="num">4px</span><span class="viz"><div style="height:44px;width:70px;background:var(--paper-sunk);border:1px solid var(--hairline-strong);border-radius:4px"></div></span></div>
+          <div class="spec"><span class="lab">radius-md</span><span class="num">8px</span><span class="viz"><div style="height:44px;width:70px;background:var(--paper-sunk);border:1px solid var(--hairline-strong);border-radius:8px"></div></span></div>
+          <div class="spec"><span class="lab">radius-lg</span><span class="num">14px</span><span class="viz"><div style="height:44px;width:70px;background:var(--paper-sunk);border:1px solid var(--hairline-strong);border-radius:14px"></div></span></div>
+          <div class="spec"><span class="lab">radius-pill</span><span class="num">999px</span><span class="viz"><div style="height:44px;width:70px;background:var(--paper-sunk);border:1px solid var(--hairline-strong);border-radius:999px"></div></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUTTONS -->
+<section class="block" id="buttons">
+  <div class="container">
+    <div class="block-head">
+      <span class="fig">Fig. E / Buttons</span>
+      <h2>Buttons</h2>
+      <p class="intro">Mono, uppercase, wide-tracked labels in sharp 2px frames. Primary inverts to cobalt on hover.</p>
+    </div>
+    <div class="panel">
+      <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center">
+        <button class="btn btn--primary">Add to bag</button>
+        <button class="btn btn--accent">Checkout</button>
+        <button class="btn btn--outline">Size guide</button>
+        <button class="btn btn--ghost">Keep shopping</button>
+        <button class="btn btn--primary" disabled>Sold out</button>
+      </div>
+      <hr class="rule">
+      <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center">
+        <button class="btn btn--accent btn--sm">Small</button>
+        <button class="btn btn--accent">Medium</button>
+        <button class="btn btn--accent btn--lg">Large</button>
+      </div>
+      <hr class="rule">
+      <div style="max-width:320px"><button class="btn btn--primary btn--block btn--lg">Add to bag — $48</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- COMMERCE -->
+<section class="block" id="commerce">
+  <div class="container">
+    <div class="block-head">
+      <span class="fig">Fig. F / Commerce</span>
+      <h2>Commerce controls</h2>
+      <p class="intro">Tags, colorway swatches, size selectors and quantity steppers — the small parts that make the store shoppable.</p>
+    </div>
+    <div class="auto-grid">
+      <div class="panel">
+        <span class="eyebrow">Tags &amp; flags</span>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:18px">
+          <span class="tag tag--new">New</span>
+          <span class="tag tag--accent">Restocked</span>
+          <span class="tag tag--solid">Bestseller</span>
+          <span class="tag">Unisex</span>
+          <span class="tag tag--sold">Sold out</span>
+        </div>
+      </div>
+      <div class="panel">
+        <span class="eyebrow">Colorways</span>
+        <div class="swatches" style="margin-top:18px" role="group" aria-label="Colorways">
+          <button class="cw" style="background:#2b2bf5" aria-pressed="true" aria-label="Cobalt"></button>
+          <button class="cw" style="background:#c7f03d" aria-pressed="false" aria-label="Lime"></button>
+          <button class="cw" style="background:#c96f4a" aria-pressed="false" aria-label="Clay"></button>
+          <button class="cw" style="background:#171614" aria-pressed="false" aria-label="Black"></button>
+        </div>
+      </div>
+      <div class="panel">
+        <span class="eyebrow">Sizes</span>
+        <div class="sizes" style="margin-top:18px" role="group" aria-label="Sizes">
+          <button class="size">XS</button>
+          <button class="size">S</button>
+          <button class="size" aria-pressed="true">M</button>
+          <button class="size">L</button>
+          <button class="size" disabled>XL</button>
+        </div>
+      </div>
+      <div class="panel">
+        <span class="eyebrow">Quantity</span>
+        <div style="margin-top:18px">
+          <span class="stepper"><button type="button" aria-label="Decrease">–</button><output>1</output><button type="button" aria-label="Increase">+</button></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMS -->
+<section class="block" id="forms">
+  <div class="container">
+    <div class="block-head">
+      <span class="fig">Fig. G / Forms</span>
+      <h2>Forms</h2>
+      <p class="intro">Mono uppercase labels, sharp surfaces, cobalt focus. Used across checkout, newsletter and account.</p>
+    </div>
+    <div class="panel">
+      <div style="display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));max-width:640px">
+        <div class="field"><label for="a">Email</label><input class="input" id="a" type="email" placeholder="you@studio.com"></div>
+        <div class="field"><label for="b">Full name</label><input class="input" id="b" placeholder="Alex Rivera"></div>
+        <div class="field"><label for="c">Discount code</label><input class="input" id="c" placeholder="HELLOHELLO"></div>
+        <div class="field"><label for="d">Disabled</label><input class="input" id="d" placeholder="Unavailable" disabled></div>
+      </div>
+      <div style="margin-top:32px"><button class="btn btn--accent btn--lg">Subscribe</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="block" id="products">
+  <div class="container">
+    <div class="block-head">
+      <span class="fig">Fig. H / Product</span>
+      <h2>Product card &amp; grid</h2>
+      <p class="intro">The core commerce object — 4:5 media, mono price, colorway dots, and a quick-add that reveals on hover.</p>
+    </div>
+    <div class="products">
+      <article class="card">
+        <div class="media" style="background:#2b2bf5"><span class="flag"><span class="tag tag--new">New</span></span><div class="quick"><button class="btn btn--primary btn--sm btn--block">Add to bag</button></div></div>
+        <div class="row"><span class="title">Whitespace Tee</span><span class="price">$48</span></div>
+        <div class="row"><span class="meta">4 colors</span><span class="swatches"><span class="cw" style="background:#2b2bf5;cursor:default"></span><span class="cw" style="background:#c7f03d;cursor:default"></span><span class="cw" style="background:#c96f4a;cursor:default"></span><span class="cw" style="background:#171614;cursor:default"></span></span></div>
+      </article>
+      <article class="card">
+        <div class="media" style="background:#171614"><div class="quick"><button class="btn btn--primary btn--sm btn--block">Add to bag</button></div></div>
+        <div class="row"><span class="title">Hello Week Hoodie</span><span class="price">$96</span></div>
+        <div class="row"><span class="meta">Heavyweight</span><span class="swatches"><span class="cw" style="background:#171614;cursor:default"></span><span class="cw" style="background:#ece5d3;cursor:default"></span><span class="cw" style="background:#2b2bf5;cursor:default"></span></span></div>
+      </article>
+      <article class="card">
+        <div class="media" style="background:#c7f03d"><span class="flag"><span class="tag tag--accent">Restocked</span></span><div class="quick"><button class="btn btn--primary btn--sm btn--block">Add to bag</button></div></div>
+        <div class="row"><span class="title">Grotesk Cap</span><span class="price">$34</span></div>
+        <div class="row"><span class="meta">One size</span><span class="swatches"><span class="cw" style="background:#c7f03d;cursor:default"></span><span class="cw" style="background:#171614;cursor:default"></span></span></div>
+      </article>
+      <article class="card">
+        <div class="media" style="background:#c96f4a"><div class="quick"><button class="btn btn--primary btn--sm btn--block">Add to bag</button></div></div>
+        <div class="row"><span class="title">Studio Tote</span><span class="price">$28</span></div>
+        <div class="row"><span class="meta">Organic cotton</span><span class="swatches"><span class="cw" style="background:#c96f4a;cursor:default"></span><span class="cw" style="background:#ece5d3;cursor:default"></span></span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- USAGE -->
+<section class="block" id="usage">
+  <div class="container">
+    <div class="block-head">
+      <span class="fig">Fig. I / Usage</span>
+      <h2>Using the tokens</h2>
+      <p class="intro">The system ships as CSS custom properties and a React kit. Drop the stylesheet in, wrap a subtree in <span class="mono">.of</span>, and compose.</p>
+    </div>
+    <div style="display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+      <div class="codeblock"><span class="c">/* 1 · import the token layer */</span><br>
+<span class="p">import</span> <span class="v">'./styles/outfit-tokens.css'</span>;<br><br>
+<span class="c">/* 2 · reference any token */</span><br>
+.price {<br>
+&nbsp;&nbsp;font: <span class="v">var(--of-price)</span>;<br>
+&nbsp;&nbsp;color: <span class="v">var(--of-ink)</span>;<br>
+}</div>
+      <div class="codeblock"><span class="c">// 3 · or use the React kit</span><br>
+<span class="p">import</span> { Button, ProductCard }<br>
+&nbsp;&nbsp;<span class="p">from</span> <span class="v">'./design-system/OutfitKit'</span>;<br><br>
+&lt;<span class="p">div</span> className=<span class="v">"of"</span>&gt;<br>
+&nbsp;&nbsp;&lt;<span class="p">Button</span> variant=<span class="v">"accent"</span>&gt;Checkout&lt;/&gt;<br>
+&lt;/<span class="p">div</span>&gt;</div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="container foot-row">
+    <span class="brand">OUTFIT<span class="reg">®</span></span>
+    <span class="note">Design system reconstructed from outfit.hellohello.is — tokens are the single source of truth, retune freely.</span>
+    <span class="note">© 2026 ++hellohello</span>
+  </div>
+</footer>
+
+<script>
+  // colorway + size demo: single-select toggling within each group
+  document.querySelectorAll('[role="group"]').forEach(function (group) {
+    group.addEventListener('click', function (e) {
+      var btn = e.target.closest('button[aria-pressed]');
+      if (!btn || btn.disabled) return;
+      group.querySelectorAll('button[aria-pressed]').forEach(function (b) {
+        b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+      });
+    });
+  });
+  // quantity stepper
+  document.querySelectorAll('.stepper').forEach(function (s) {
+    var out = s.querySelector('output');
+    var btns = s.querySelectorAll('button');
+    btns[0].addEventListener('click', function () { out.textContent = Math.max(1, (+out.textContent) - 1); });
+    btns[1].addEventListener('click', function () { out.textContent = Math.min(99, (+out.textContent) + 1); });
+  });
+</script>

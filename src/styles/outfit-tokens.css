@@ -1,0 +1,481 @@
+/* ============================================================================
+   OUTFIT® — Design System Tokens
+   Reconstructed from the art direction of outfit.hellohello.is (++hellohello):
+   editorial commerce, neutral Swiss grotesque + monospace metadata, warm paper
+   base, deep ink, one electric accent, product colorways, sharp print corners.
+
+   All values live as CSS custom properties on :root (prefixed --of-*) so nothing
+   collides with the rest of the app. Retune the brand by editing the tokens in
+   the "PRIMITIVES" block — everything downstream is derived from them.
+   ========================================================================== */
+
+:root {
+  /* ---- TYPE FAMILIES ------------------------------------------------------
+     Neue Haas Grotesk is licensed; the stack falls back to Helvetica Neue /
+     Arial, which share its neutral Swiss character and need no web loading. */
+  --of-font-sans: "Neue Haas Grotesk Display Pro", "NeueHaasGroteskDisplayPro",
+    "Neue Haas Grotesk", "Helvetica Neue", Helvetica, Arial, "Inter", sans-serif;
+  --of-font-mono: "Neue Haas Grotesk Mono", ui-monospace, "SFMono-Regular",
+    "JetBrains Mono", "Roboto Mono", Menlo, Consolas, monospace;
+
+  /* ---- PRIMITIVE COLOR RAMP ---------------------------------------------- */
+  /* Neutrals — warm paper to ink */
+  --of-paper:            #f1eee6; /* page canvas — warm bone           */
+  --of-paper-sunk:       #e8e4d9; /* recessed sections / wells         */
+  --of-surface:          #fcfbf7; /* cards / raised surfaces           */
+  --of-ink:              #121110; /* near-black — headings, on-paper   */
+  --of-ink-2:            #2a2824; /* strong body                       */
+  --of-graphite:         #55524b; /* body copy                         */
+  --of-slate:            #8b877e; /* muted / captions                  */
+  --of-fog:              #b8b4a9; /* disabled / faint                  */
+  --of-hairline:         #d9d5c8; /* borders on paper                  */
+  --of-hairline-strong:  #c3bdad; /* emphasised rules                  */
+
+  /* Accent — electric cobalt: CTAs, links, focus, the ® mark */
+  --of-accent:           #2b2bf5;
+  --of-accent-press:     #1e1ecb;
+  --of-accent-ink:       #ffffff;
+  --of-accent-soft:      rgba(43, 43, 245, 0.08);
+  --of-accent-line:      rgba(43, 43, 245, 0.32);
+
+  /* Product colorways — the swatch set garments ship in */
+  --of-way-cobalt:  #2b2bf5;
+  --of-way-lime:    #c7f03d;
+  --of-way-red:     #ff3b2e;
+  --of-way-lilac:   #c6b4ff;
+  --of-way-butter:  #f4ce3a;
+  --of-way-forest:  #17493b;
+  --of-way-clay:    #c96f4a;
+  --of-way-sky:     #9fd6e8;
+  --of-way-cream:   #ece5d3;
+  --of-way-black:   #171614;
+
+  /* Status */
+  --of-success:  #1e7f4e;
+  --of-warning:  #b8791b;
+  --of-error:    #c4362b;
+
+  /* ---- TYPE SCALE --------------------------------------------------------
+     Editorial: tight negative tracking on display, mono + wide tracking on
+     labels. Each token is a shorthand `font` value; tracking is separate. */
+  --of-display:  700 clamp(64px, 11vw, 128px)/0.92 var(--of-font-sans);
+  --of-h1:       700 clamp(44px, 6vw, 72px)/0.98 var(--of-font-sans);
+  --of-h2:       600 clamp(32px, 4vw, 46px)/1.02 var(--of-font-sans);
+  --of-h3:       600 clamp(24px, 2.4vw, 30px)/1.1 var(--of-font-sans);
+  --of-h4:       600 20px/1.25 var(--of-font-sans);
+  --of-lead:     400 clamp(18px, 1.6vw, 21px)/1.5 var(--of-font-sans);
+  --of-body:     400 16px/1.6 var(--of-font-sans);
+  --of-small:    400 14px/1.5 var(--of-font-sans);
+  --of-label:    600 12px/1.1 var(--of-font-mono);
+  --of-meta:     500 13px/1.4 var(--of-font-mono);
+  --of-price:    500 15px/1 var(--of-font-mono);
+
+  --of-track-display: -0.045em;
+  --of-track-h1:      -0.035em;
+  --of-track-h2:      -0.025em;
+  --of-track-h3:      -0.02em;
+  --of-track-label:    0.14em;
+  --of-track-meta:     0.02em;
+
+  /* ---- SPACE (4px base) -------------------------------------------------- */
+  --of-space-1: 4px;
+  --of-space-2: 8px;
+  --of-space-3: 12px;
+  --of-space-4: 16px;
+  --of-space-5: 24px;
+  --of-space-6: 32px;
+  --of-space-7: 48px;
+  --of-space-8: 64px;
+  --of-space-9: 96px;
+  --of-space-10: 128px;
+
+  /* ---- RADII (sharp / print-first) --------------------------------------- */
+  --of-radius-0:    0px;
+  --of-radius-xs:   2px;
+  --of-radius-sm:   4px;
+  --of-radius-md:   8px;
+  --of-radius-lg:   14px;
+  --of-radius-pill: 999px;
+
+  /* ---- BORDERS ----------------------------------------------------------- */
+  --of-border:        1px solid var(--of-hairline);
+  --of-border-strong: 1px solid var(--of-hairline-strong);
+  --of-border-ink:    1.5px solid var(--of-ink);
+
+  /* ---- ELEVATION (mostly flat) ------------------------------------------- */
+  --of-shadow-sm:   0 1px 2px rgba(18, 17, 16, 0.06);
+  --of-shadow-card: 0 18px 48px -20px rgba(18, 17, 16, 0.28);
+  --of-focus:       0 0 0 2px var(--of-paper), 0 0 0 4px var(--of-accent);
+
+  /* ---- MOTION ------------------------------------------------------------ */
+  --of-ease:      cubic-bezier(0.22, 0.61, 0.36, 1);
+  --of-ease-out:  cubic-bezier(0.16, 1, 0.3, 1);
+  --of-dur-fast:  120ms;
+  --of-dur:       240ms;
+  --of-dur-slow:  520ms;
+
+  /* ---- LAYOUT ------------------------------------------------------------ */
+  --of-container: 1360px;
+  --of-gutter: clamp(16px, 4vw, 40px);
+
+  /* ---- Z-INDEX ----------------------------------------------------------- */
+  --of-z-base: 1;
+  --of-z-sticky: 100;
+  --of-z-nav: 200;
+  --of-z-overlay: 300;
+  --of-z-modal: 400;
+}
+
+/* ============================================================================
+   BASE — scoped to `.of` so it never touches the rest of the app
+   ========================================================================== */
+.of {
+  background: var(--of-paper);
+  color: var(--of-ink-2);
+  font: var(--of-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+.of *,
+.of *::before,
+.of *::after { box-sizing: border-box; }
+
+.of h1, .of h2, .of h3, .of h4 { margin: 0; color: var(--of-ink); }
+.of h1 { font: var(--of-h1); letter-spacing: var(--of-track-h1); }
+.of h2 { font: var(--of-h2); letter-spacing: var(--of-track-h2); }
+.of h3 { font: var(--of-h3); letter-spacing: var(--of-track-h3); }
+.of h4 { font: var(--of-h4); }
+.of p  { margin: 0; }
+.of a  { color: var(--of-accent); text-decoration: none; }
+.of a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.of img { max-width: 100%; display: block; }
+
+/* ============================================================================
+   LAYOUT PRIMITIVES
+   ========================================================================== */
+.of-container {
+  width: 100%;
+  max-width: var(--of-container);
+  margin-inline: auto;
+  padding-inline: var(--of-gutter);
+}
+.of-grid-products {
+  display: grid;
+  gap: var(--of-space-6) var(--of-space-4);
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+.of-rule { border: none; border-top: var(--of-border); margin: 0; }
+.of-rule--ink { border-top: var(--of-border-ink); }
+
+/* ============================================================================
+   TYPOGRAPHY HELPERS
+   ========================================================================== */
+.of-display { font: var(--of-display); letter-spacing: var(--of-track-display); color: var(--of-ink); margin: 0; }
+.of-lead    { font: var(--of-lead); color: var(--of-graphite); margin: 0; }
+.of-small   { font: var(--of-small); color: var(--of-graphite); }
+.of-muted   { color: var(--of-slate); }
+.of-mono    { font-family: var(--of-font-mono); }
+
+/* Eyebrow / kicker — the mono, tracked, uppercase label that sits above heads */
+.of-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--of-space-2);
+  font: var(--of-label);
+  letter-spacing: var(--of-track-label);
+  text-transform: uppercase;
+  color: var(--of-slate);
+}
+.of-eyebrow::before {
+  content: "";
+  width: 18px;
+  height: 1px;
+  background: var(--of-hairline-strong);
+}
+
+/* Registered mark set in accent, superscript */
+.of-reg { color: var(--of-accent); font-size: 0.42em; vertical-align: super; font-weight: 600; }
+
+/* ============================================================================
+   BUTTONS
+   ========================================================================== */
+.of-btn {
+  --_pad-y: 12px;
+  --_pad-x: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--of-space-2);
+  padding: var(--_pad-y) var(--_pad-x);
+  font: var(--of-label);
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1.5px solid transparent;
+  border-radius: var(--of-radius-xs);
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background var(--of-dur-fast) var(--of-ease),
+    color var(--of-dur-fast) var(--of-ease),
+    border-color var(--of-dur-fast) var(--of-ease),
+    transform var(--of-dur-fast) var(--of-ease);
+}
+.of-btn:hover { text-decoration: none; }
+.of-btn:active { transform: translateY(1px); }
+.of-btn:focus-visible { outline: none; box-shadow: var(--of-focus); }
+
+.of-btn--primary { background: var(--of-ink); color: var(--of-surface); border-color: var(--of-ink); }
+.of-btn--primary:hover { background: var(--of-accent); border-color: var(--of-accent); color: var(--of-accent-ink); }
+
+.of-btn--accent { background: var(--of-accent); color: var(--of-accent-ink); border-color: var(--of-accent); }
+.of-btn--accent:hover { background: var(--of-accent-press); border-color: var(--of-accent-press); }
+
+.of-btn--outline { background: transparent; color: var(--of-ink); border-color: var(--of-ink); }
+.of-btn--outline:hover { background: var(--of-ink); color: var(--of-surface); }
+
+.of-btn--ghost { background: transparent; color: var(--of-graphite); border-color: transparent; }
+.of-btn--ghost:hover { color: var(--of-ink); background: var(--of-accent-soft); }
+
+.of-btn--lg { --_pad-y: 16px; --_pad-x: 32px; font-size: 14px; }
+.of-btn--sm { --_pad-y: 9px; --_pad-x: 16px; font-size: 12px; }
+.of-btn--block { display: flex; width: 100%; }
+.of-btn[disabled], .of-btn[aria-disabled="true"] {
+  opacity: 0.45; pointer-events: none;
+}
+
+/* ============================================================================
+   TAGS / BADGES / PILLS
+   ========================================================================== */
+.of-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px;
+  font: var(--of-label);
+  letter-spacing: var(--of-track-label);
+  text-transform: uppercase;
+  color: var(--of-ink);
+  border: var(--of-border-strong);
+  border-radius: var(--of-radius-pill);
+  background: transparent;
+}
+.of-tag--solid  { background: var(--of-ink); color: var(--of-surface); border-color: var(--of-ink); }
+.of-tag--accent { background: var(--of-accent); color: var(--of-accent-ink); border-color: var(--of-accent); }
+.of-tag--new    { background: var(--of-way-lime); color: var(--of-ink); border-color: var(--of-way-lime); }
+.of-tag--sold   { background: transparent; color: var(--of-slate); border-color: var(--of-hairline-strong); text-decoration: line-through; }
+
+/* ============================================================================
+   COLORWAY SWATCHES
+   ========================================================================== */
+.of-swatches { display: inline-flex; gap: var(--of-space-2); }
+.of-swatch {
+  width: 18px; height: 18px;
+  border-radius: var(--of-radius-pill);
+  border: 1px solid rgba(18, 17, 16, 0.18);
+  padding: 0;
+  cursor: pointer;
+  transition: transform var(--of-dur-fast) var(--of-ease), box-shadow var(--of-dur-fast) var(--of-ease);
+}
+.of-swatch:hover { transform: scale(1.12); }
+.of-swatch[aria-pressed="true"], .of-swatch.is-active {
+  box-shadow: 0 0 0 2px var(--of-paper), 0 0 0 3.5px var(--of-ink);
+}
+
+/* ============================================================================
+   SIZE SELECTOR
+   ========================================================================== */
+.of-sizes { display: inline-flex; flex-wrap: wrap; gap: var(--of-space-2); }
+.of-size {
+  min-width: 44px;
+  padding: 10px 12px;
+  font: var(--of-meta);
+  text-transform: uppercase;
+  color: var(--of-ink);
+  background: transparent;
+  border: var(--of-border-strong);
+  border-radius: var(--of-radius-xs);
+  cursor: pointer;
+  transition: background var(--of-dur-fast) var(--of-ease), color var(--of-dur-fast) var(--of-ease), border-color var(--of-dur-fast) var(--of-ease);
+}
+.of-size:hover { border-color: var(--of-ink); }
+.of-size[aria-pressed="true"], .of-size.is-active { background: var(--of-ink); color: var(--of-surface); border-color: var(--of-ink); }
+.of-size[disabled] { color: var(--of-fog); border-color: var(--of-hairline); text-decoration: line-through; cursor: not-allowed; }
+
+/* ============================================================================
+   QUANTITY STEPPER
+   ========================================================================== */
+.of-stepper {
+  display: inline-flex;
+  align-items: stretch;
+  border: var(--of-border-strong);
+  border-radius: var(--of-radius-xs);
+  overflow: hidden;
+}
+.of-stepper button {
+  width: 40px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: var(--of-ink);
+  transition: background var(--of-dur-fast) var(--of-ease);
+}
+.of-stepper button:hover { background: var(--of-accent-soft); }
+.of-stepper output {
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font: var(--of-meta);
+  border-inline: var(--of-border-strong);
+}
+
+/* ============================================================================
+   FORM FIELDS
+   ========================================================================== */
+.of-field { display: flex; flex-direction: column; gap: var(--of-space-2); }
+.of-field > label {
+  font: var(--of-label);
+  letter-spacing: var(--of-track-label);
+  text-transform: uppercase;
+  color: var(--of-slate);
+}
+.of-input {
+  width: 100%;
+  padding: 13px 14px;
+  font: var(--of-body);
+  font-size: 15px;
+  color: var(--of-ink);
+  background: var(--of-surface);
+  border: var(--of-border-strong);
+  border-radius: var(--of-radius-xs);
+  transition: border-color var(--of-dur-fast) var(--of-ease), box-shadow var(--of-dur-fast) var(--of-ease);
+}
+.of-input::placeholder { color: var(--of-fog); }
+.of-input:focus { outline: none; border-color: var(--of-accent); box-shadow: 0 0 0 3px var(--of-accent-soft); }
+.of-input:disabled { background: var(--of-paper-sunk); color: var(--of-slate); }
+
+/* ============================================================================
+   PRODUCT CARD
+   ========================================================================== */
+.of-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--of-space-3);
+  text-align: left;
+}
+.of-card__media {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  background: var(--of-paper-sunk);
+  border: var(--of-border);
+  border-radius: var(--of-radius-sm);
+  overflow: hidden;
+}
+.of-card__media > * { width: 100%; height: 100%; object-fit: cover; }
+.of-card__flag {
+  position: absolute;
+  top: var(--of-space-3);
+  left: var(--of-space-3);
+  z-index: 2;
+}
+.of-card__quick {
+  position: absolute;
+  inset: auto var(--of-space-3) var(--of-space-3);
+  transform: translateY(8px);
+  opacity: 0;
+  transition: opacity var(--of-dur) var(--of-ease), transform var(--of-dur) var(--of-ease);
+}
+.of-card:hover .of-card__quick { opacity: 1; transform: translateY(0); }
+.of-card__row { display: flex; align-items: baseline; justify-content: space-between; gap: var(--of-space-3); }
+.of-card__title { font: var(--of-h4); font-size: 17px; color: var(--of-ink); }
+.of-card__price { font: var(--of-price); color: var(--of-ink); }
+.of-card__meta  { font: var(--of-meta); color: var(--of-slate); letter-spacing: var(--of-track-meta); }
+
+/* ============================================================================
+   MARQUEE / TICKER
+   ========================================================================== */
+.of-marquee {
+  --_gap: 3rem;
+  --_speed: 26s;
+  overflow: hidden;
+  border-block: var(--of-border-ink);
+  background: var(--of-ink);
+  color: var(--of-surface);
+  padding-block: var(--of-space-3);
+}
+.of-marquee__track {
+  display: flex;
+  align-items: center;
+  gap: var(--_gap);
+  width: max-content;
+  padding-left: var(--_gap);
+  animation: of-marquee var(--_speed) linear infinite;
+}
+.of-marquee__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--of-space-2);
+  font: var(--of-label);
+  font-size: 14px;
+  letter-spacing: var(--of-track-label);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.of-marquee__item::after { content: "✳"; color: var(--of-accent); font-size: 0.8em; margin-left: var(--_gap); }
+@keyframes of-marquee { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .of-marquee__track { animation: none; }
+}
+
+/* ============================================================================
+   NAV BAR
+   ========================================================================== */
+.of-nav {
+  position: sticky;
+  top: 0;
+  z-index: var(--of-z-nav);
+  display: flex;
+  align-items: center;
+  gap: var(--of-space-6);
+  height: 68px;
+  padding-inline: var(--of-gutter);
+  background: color-mix(in srgb, var(--of-paper) 86%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: var(--of-border);
+}
+.of-nav__brand { font: var(--of-h4); font-weight: 700; letter-spacing: -0.02em; color: var(--of-ink); }
+.of-nav__links { display: flex; gap: var(--of-space-5); }
+.of-nav__link {
+  font: var(--of-label);
+  font-size: 12px;
+  letter-spacing: var(--of-track-label);
+  text-transform: uppercase;
+  color: var(--of-graphite);
+  text-decoration: none;
+}
+.of-nav__link:hover { color: var(--of-ink); text-decoration: none; }
+.of-nav__cart {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--of-space-2);
+  font: var(--of-label);
+  font-size: 12px;
+  letter-spacing: var(--of-track-label);
+  text-transform: uppercase;
+  color: var(--of-ink);
+}
+.of-nav__cart-count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding-inline: 5px;
+  border-radius: var(--of-radius-pill);
+  background: var(--of-accent);
+  color: var(--of-accent-ink);
+  font-size: 11px;
+}

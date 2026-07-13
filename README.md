@@ -2,6 +2,20 @@
 
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
 
+## OUTFIT® Design System
+
+An editorial-commerce design system reconstructed from
+[outfit.hellohello.is](https://outfit.hellohello.is/) lives in
+[`design-system/`](./design-system/README.md):
+
+- Tokens & component primitives — `src/styles/outfit-tokens.css`
+- React component kit — `src/design-system/OutfitKit.jsx`
+- Living style guide — run `npm run dev` and open **`/design-system`**
+- Standalone/shareable guide — `design-system/styleguide.html`
+
+See [`design-system/README.md`](./design-system/README.md) for the principles,
+tokens, and usage.
+
 Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
